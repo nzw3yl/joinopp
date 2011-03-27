@@ -1,0 +1,54 @@
+.container {
+   width: 50em;
+   text-align: left;
+   margin:0 auto;
+}
+
+html, body {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   background: #cff; 
+}
+
+#header {
+   position: relative;
+   height: 2em;
+   width: 100%;
+   display: block;
+   overflow: auto;
+   padding-top: 20px;
+}
+
+#leftcol {
+   width: 5em;
+   float: left;
+   position: relative;
+}
+
+#twocols {
+   position: relative;
+   width: 45em;
+   float: left;
+}
+
+#rightcol {
+   width: 5em;
+   float: right;
+   position: relative;
+}
+
+#maincol {
+   float: left;
+   position: relative;
+   width: 40em;
+   text-align: center;
+   background-color: #ccccff;
+}
+
+#footer {
+   height: 3em;
+   clear: both;
+   display: block;
+   overflow: auto;
+}

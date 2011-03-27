@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JoinOpp | <%= @title%></title>
-  <%= csrf_meta_tag %>
+  <title><%= title%></title>
+    <%= csrf_meta_tag %>
+    <%= render 'layouts/stylesheets' %>
 </head>
 <body>
-  <div id="pagewidth">
-     <div id="header">
-     </div>
+  <div id="container">
+     <%= render 'layouts/header' %>
      <div id="wrapper" class="clearix">
+          <%= render 'layouts/leftcol' %>
           <div id="twocols">
               <div id="maincol">
 		    <%= yield %>
               </div>
-              <div id="rightcol">
-              </div>
-          </div>
-          <div id="leftcol">
-          </div>
+	      <%= render 'layouts/rightcol' %>
+          </div>  
       </div>
-      <div id="footer">
-      </div>
+      <%= render 'layouts/footer' %>
    </div>
 </body>
 </html>
