@@ -1,0 +1,31 @@
+require 'spec_helper'
+
+describe "LayoutLinks" do
+    
+    it "should have a Home page at '/'" do
+      get '/'
+      response.should have_selector('title', :content => "Home")
+    end
+
+     it "should have a Contact page at '/contact'" do
+      get '/'
+      response.should have_selector('title', :content => "Contact")
+    end
+
+     it "should have a Privacy page at '/privacy'" do
+      get '/'
+      response.should have_selector('title', :content => "Privacy")
+    end
+
+     it "should have an About page at '/about'" do
+      get '/'
+      response.should have_selector('title', :content => "About")
+    end
+
+    it "should have a Help page at '/help'" do
+      get '/'
+      response.should have_selector('title', :content => "Help")
+    end
+
+
+end
