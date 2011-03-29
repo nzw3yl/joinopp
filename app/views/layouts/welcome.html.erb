@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title%></title>
+    <%= csrf_meta_tag %>
+    <%= render 'layouts/stylesheets' %>
+</head>
+<body>
+<div id="outer">
+	<%= render 'layouts/header' %>
+	<div id="content">
+		<div id="tertiaryContent">
+			
+		</div>
+		<div id="primaryContentContainer">
+			<div id="primaryContent">
+				<h2>Welcome to JoinOpp.com!</h2>
+				<p><%= yield %></p>
+				
+			</div>
+		</div>
+		<div id="secondaryContent">
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+	<%= render 'layouts/footer' %>
+</div>
+</body>
+</html>

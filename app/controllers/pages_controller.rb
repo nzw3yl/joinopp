@@ -19,4 +19,9 @@ class PagesController < ApplicationController
     @title = "Help"
   end
 
+  def welcome
+    @title = "Welcome"
+    render :layout => 'welcome'
+  end
+
 end

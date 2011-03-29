@@ -7,19 +7,7 @@
 </head>
 <body>
 <div id="outer">
-	<div id="header">
-		<h1><a href="#">JoinOpp</a></h1>
-		<h2>make a difference</h2>
-	</div>
-	<div id="menu">
-		<ul>
-			<li class="first"><%= link_to "Home", root_path %></li>
-			<li><%= link_to "About", about_path %></li>
-			<li><%= link_to "Privacy", privacy_path %></li>
-			<li><%= link_to "Help", help_path %></li>
-			<li><%= link_to "Contact", contact_path %></li>
-		</ul>
-	</div>
+	<%= render 'layouts/header' %>
 	<div id="content">
 		<div id="tertiaryContent">
 			<h3>Active Priorities</h3>
@@ -126,9 +114,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div id="footer">
-		<p>Copyright &copy; 2006 Sitename.com. Designed by <a href="http://www.freecsstemplates.org">Free CSS Templates</a></p>
-	</div>
+	<%= render 'layouts/footer' %>
 </div>
 </body>
 </html>
