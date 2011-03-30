@@ -1,10 +1,16 @@
 class UsersController < ApplicationController
+  
+  layout "welcome", :except => [:show]  
 
-  layout "welcome", :except => [:index]  
 
   def new
     @title = "Welcome"
     render 'pages/welcome'
+  end
+
+  def show
+    @user = User.find(params[:id])
+    render :layout => "application"
   end
 
 end
