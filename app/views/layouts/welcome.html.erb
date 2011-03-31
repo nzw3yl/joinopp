@@ -10,7 +10,33 @@
 	<%= render 'layouts/header' %>
 	<div id="content">
 		<div id="tertiaryContent">
-			
+                       
+		    	<%= form_for(@user) do |f| %>
+                          <%= render 'shared/error_messages' %>
+			  <div class="field">
+				<%= f.label :first_name, "first name" %><br />
+				<%= f.text_field :first_name, :size=> 20 %>
+			  </div>
+			  <div class="field">
+				<%= f.label :last_name, "last name" %><br />
+				<%= f.text_field :last_name, :size=> 20 %>
+			  </div>
+                          <div class="field">
+				<%= f.label :email, "email" %><br />
+				<%= f.text_field :email, :size=> 20 %>
+			  </div>
+                          <div class="field">
+				<%= f.label :password, "password" %><br />
+				<%= f.password_field :password, :size=> 20 %>
+			  </div>
+                          <div class="field">
+				<%= f.label :password_confirmation, "confirmation" %><br />
+				<%= f.password_field :password_confirmation, :size=> 20 %>
+			  </div>
+			  <div class="actions">
+				<%= f.submit "sign up" %>
+			  </div>
+                 	<% end %>	
 		</div>
 		<div id="primaryContentContainer">
 			<div id="primaryContent">

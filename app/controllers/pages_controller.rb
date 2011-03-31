@@ -21,6 +21,7 @@ class PagesController < ApplicationController
 
   def welcome
     @title = "Welcome"
+    @user = User.new
     render :layout => 'welcome'
   end
 
