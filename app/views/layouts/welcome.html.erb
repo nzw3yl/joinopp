@@ -13,14 +13,13 @@
                        
 		    	<%= form_for(@user) do |f| %>
                           <%= render 'shared/error_messages' %>
+			 <fieldset>
+                         <legend>Sign up!</legend>
 			  <div class="field">
-				<%= f.label :first_name, "first name" %><br />
-				<%= f.text_field :first_name, :size=> 20 %>
+				<%= f.label :name, "name" %><br />
+				<%= f.text_field :name, :size=> 20 %>
 			  </div>
-			  <div class="field">
-				<%= f.label :last_name, "last name" %><br />
-				<%= f.text_field :last_name, :size=> 20 %>
-			  </div>
+
                           <div class="field">
 				<%= f.label :email, "email" %><br />
 				<%= f.text_field :email, :size=> 20 %>
@@ -33,9 +32,14 @@
 				<%= f.label :password_confirmation, "confirmation" %><br />
 				<%= f.password_field :password_confirmation, :size=> 20 %>
 			  </div>
+			  <div class="field">
+				<%= f.label :welcome_code, "access code" %><br />
+				<%= f.text_field :welcome_code, :size=> 20 %>
+			  </div>
 			  <div class="actions">
 				<%= f.submit "sign up" %>
 			  </div>
+                         </fieldset>
                  	<% end %>	
 		</div>
 		<div id="primaryContentContainer">

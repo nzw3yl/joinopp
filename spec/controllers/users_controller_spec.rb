@@ -11,7 +11,6 @@ describe UsersController do
 
     before(:each) do
       @user = Factory(:user)
-      @full_name = @user.first_name + " " + @user.last_name
     end
 
     it "should be successful" do
@@ -26,12 +25,12 @@ describe UsersController do
 
     it "should have the right title" do
       get :show, :id => @user
-      response.should have_selector("title", :content => @full_name)
+      response.should have_selector("title", :content => @name)
     end
 
     it "should include the user's name" do
       get :show, :id => @user
-      response.should have_selector("h1", :content => @full_name)
+      response.should have_selector("h1", :content => @name)
     end
 
     it "should have a profile image" do
@@ -58,8 +57,8 @@ describe UsersController do
     describe "failure" do
       
       before(:each) do
-        @attr = { 	:first_name => "", 
-			:last_name => "", 
+        @attr = { 	:name => "", 
+			:welcome_code => "", 
 			:email => "", 
 			:password => "", 
 			:password_confirmation => "" 
@@ -82,6 +81,30 @@ describe UsersController do
 	response.should render_template('welcome')
       end
 
+    end
+
+    describe "success" do
+       
+	before(:each) do
+		@attr = { :name => "New User", :email => "user@example.com" , :welcome_code => "welcome", 
+			  :password => "foobar", :password_confirmation => "foobar" }
+	end
+
+	it "should create a user" do
+		lambda do
+		   post :create, :user => @attr
+		end.should change(User, :count).by(1)
+	end
+
+ 	it "should redirect to the user show page" do
+		post :create, :user => @attr
+		response.should redirect_to(user_path(assigns(:user)))
+	end
+
+  	it "should have a welcome message" do
+		post :create, :user => @attr
+		flash[:success].should =~ /welcome/i
+	end
     end
 
   end

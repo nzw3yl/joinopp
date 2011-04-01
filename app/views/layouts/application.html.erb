@@ -45,6 +45,9 @@
 		<div id="primaryContentContainer">
 			<div id="primaryContent">
 				<h2>Welcome to JoinOpp.com!</h2>
+				<% flash.each do |key, value| %>
+				   <div class="flash <%= key %>"><%= value %></div>
+				<% end %>
 				<p><%= yield %></p>
 				<p>Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in, congue in, dui. Nunc rhoncus placerat augue. Donec justo odio, eleifend varius, volutpat venenatis, sagittis ut, orci. Donec nulla est, laoreet quis, pellentesque in, congue in, dui. Nunc rhoncus placerat augue. Donec justo odio, eleifend varius, volutpat venenatis, sagittis ut, orci. Nullam et orci in erat viverra ornare. Nunc pellentesque.</p>
 				<p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Quisque pellentesque semper massa:</p>
