@@ -1,0 +1,13 @@
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <%= pluralize(@user.errors.count, "error")%> prohibited your account from being created:
+    <div id="error_list"> 
+      There were problems with the following fields:
+    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

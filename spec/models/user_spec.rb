@@ -4,8 +4,8 @@ describe User do
   
   before(:each) do
     @attr = { 
- 		:first_name => "Example", 
-		:last_name => "User", 
+ 		:name => "Example", 
+		:welcome_code => "User", 
 		:email => "user@example.com",
 		:password => "foobar",
 		:password_confirmation => "foobar" 
@@ -16,14 +16,14 @@ describe User do
     User.create!(@attr)
   end
 
-  it "should require a first_name" do
-    no_first_name_user = User.new(@attr.merge(:first_name => ""))
-    no_first_name_user.should_not be_valid
+  it "should require a name" do
+    no_name_user = User.new(@attr.merge(:name => ""))
+    no_name_user.should_not be_valid
   end
 
-  it "should require a last_name" do
-    no_last_name_user = User.new(@attr.merge(:last_name => ""))
-    no_last_name_user.should_not be_valid
+  it "should require a welcome_code" do
+    no_welcome_code_user = User.new(@attr.merge(:welcome_code => ""))
+    no_welcome_code_user.should_not be_valid
   end
 
   it "should require an email address" do
@@ -31,16 +31,16 @@ describe User do
     no_email_user.should_not be_valid
   end
 
-  it "should reject first names that are too long" do
-    long_first_name = "a" * 51
-    long_first_name_user = User.new(@attr.merge(:first_name => long_first_name))
-    long_first_name_user.should_not be_valid
+  it "should reject names that are too long" do
+    long_name = "a" * 51
+    long_name_user = User.new(@attr.merge(:name => long_name))
+    long_name_user.should_not be_valid
   end
 
-  it "should reject last names that are too long" do
-    long_last_name = "a" * 51
-    long_last_name_user = User.new(@attr.merge(:last_name => long_last_name))
-    long_last_name_user.should_not be_valid
+  it "should reject welcome_codes that are too long" do
+    welcome_code = "a" * 51
+    welcome_code_user = User.new(@attr.merge(:welcome_code => welcome_code))
+    welcome_code_user.should_not be_valid
   end
 
   it "should accept valid email addresses" do
