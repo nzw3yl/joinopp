@@ -10,33 +10,33 @@
 	<%= render 'layouts/header' %>
 	<div id="content">
 		<div id="tertiaryContent">
-                       
+                       <%@user ||= User.new %>
 		    	<%= form_for(@user) do |f| %>
                           <%= render 'shared/error_messages' %>
 			 <fieldset>
                          <legend>Sign up!</legend>
-			  <div class="field">
+			  <div id="signup_name" class="field">
 				<%= f.label :name, "name" %><br />
 				<%= f.text_field :name, :size=> 20 %>
 			  </div>
 
-                          <div class="field">
+                          <div id="signup_email" class="field">
 				<%= f.label :email, "email" %><br />
 				<%= f.text_field :email, :size=> 20 %>
 			  </div>
-                          <div class="field">
+                          <div id="signup_password" class="field">
 				<%= f.label :password, "password" %><br />
 				<%= f.password_field :password, :size=> 20 %>
 			  </div>
-                          <div class="field">
+                          <div id="signup_confirmation" class="field">
 				<%= f.label :password_confirmation, "confirmation" %><br />
 				<%= f.password_field :password_confirmation, :size=> 20 %>
 			  </div>
-			  <div class="field">
+			  <div id="signup_welcome_code" class="field">
 				<%= f.label :welcome_code, "access code" %><br />
 				<%= f.text_field :welcome_code, :size=> 20 %>
 			  </div>
-			  <div class="actions">
+			  <div id="signup_button" class="actions">
 				<%= f.submit "sign up" %>
 			  </div>
                          </fieldset>
@@ -45,6 +45,9 @@
 		<div id="primaryContentContainer">
 			<div id="primaryContent">
 				<h2>Welcome to JoinOpp.com!</h2>
+                                <% flash.each do |key, value| %>
+				   <div class="flash <%= key %>"><%= value %></div>
+				<% end %>
 				<p><%= yield %></p>
 				
 			</div>

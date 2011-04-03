@@ -101,6 +101,7 @@ a:hover
 	padding-left: 0em;
 }
 
+
 #menu li a
 {
 	color: #fff;
@@ -111,6 +112,34 @@ a:hover
 #menu li a:hover
 {
 	text-decoration: underline;
+}
+
+/* Sign In */
+
+#signin {
+	position: absolute;
+	top: 1.7em;
+	right: 3em;
+}
+
+#signin form {
+ 	float: right;
+	margin: 0;
+	padding: 4px 0px 0 0;
+}
+
+#signin fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#signin field {
+	float: left;
+}
+
+#signin label {
+	color: white;
 }
 
 /* Content */

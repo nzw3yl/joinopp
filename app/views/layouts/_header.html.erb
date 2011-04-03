@@ -2,12 +2,36 @@
 		<h1><%= link_to "JoinOpp", home_path %></h1>
 		<h2>what needs doing?</h2>
 	</div>
-	<div id="menu">
+	<% if !signed_in? %>
+	 <div id="signin">
+                <%= form_for(:session, :url => sessions_path) do |f| %>
+			 <fieldset>
+			  <span id="signin_email" class="field">
+				<%= f.label :email, "email" %>
+				<%= f.text_field :email, :size=> 20 %>
+			  </span>
+                          <span id="signin_password" class="field">
+				<%= f.label :password, "password" %>
+				<%= f.password_field :password, :size=> 20 %>
+			  </span>
+                          <span id="signin_button" class="actions">
+				<%= f.submit "sign in" %>
+			  </span>
+                       </fieldset>
+               <% end %>
+         </div>
+        <% end%>
+        
+         <div id="menu">
 		<ul>
 			<li class="first"><%= link_to "Home", home_path %></li>
 			<li><%= link_to "About", about_path %></li>
 			<li><%= link_to "Privacy", privacy_path %></li>
 			<li><%= link_to "Help", help_path %></li>
 			<li><%= link_to "Contact", contact_path %></li>
+                        <%if signed_in? %>>
+			<li><%= link_to "Sign out", signout_path %></li>
+			<% end %>
 		</ul>
 	</div>
+   
