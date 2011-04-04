@@ -81,6 +81,8 @@ describe UsersController do
 	response.should render_template('welcome')
       end
 
+      it "should only accept valid welcome codes" 
+
     end
 
     describe "success" do

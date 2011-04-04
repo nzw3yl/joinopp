@@ -1,5 +1,10 @@
         <div id="header">
-		<h1><%= link_to "JoinOpp", home_path %></h1>
+                <% if signed_in? %>
+		<h1><%= link_to "JoinOpp",home_path %></h1>
+	        <% else%>
+		<h1><%= link_to "JoinOpp",root_path %></h1>
+		<% end %>
+		
 		<h2>what needs doing?</h2>
 	</div>
 	<% if !signed_in? %>
@@ -24,7 +29,9 @@
         
          <div id="menu">
 		<ul>
+                        <% if signed_in? %>
 			<li class="first"><%= link_to "Home", home_path %></li>
+                        <% end %>
 			<li><%= link_to "About", about_path %></li>
 			<li><%= link_to "Privacy", privacy_path %></li>
 			<li><%= link_to "Help", help_path %></li>

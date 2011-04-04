@@ -8,12 +8,20 @@ describe PagesController do
   end
 
   describe "GET 'home'" do
-    it "should be successful" do
+
+    it "should be successful when signed in" do
+      test_sign_in(Factory(:user))
       get 'home'
       response.should be_success
     end
 
-    it "should have the right title" do
+    it "should fail when not signed in" do
+      get 'home'
+      response.should_not be_success
+    end
+
+    it "should have the right title when signed in" do
+      test_sign_in(Factory(:user))
       get :home
       response.should have_selector("title", :content => @base_title + " | Home")
     end
