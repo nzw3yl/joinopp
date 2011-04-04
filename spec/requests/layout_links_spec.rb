@@ -14,10 +14,11 @@ describe "LayoutLinks" do
       response.should have_selector('title', :content => "Welcome")
     end
 
-     it "should have a Home page at '/home'" do
-      get '/home'
-      response.should have_selector('title', :content => "Home")
+    it "should not have a Home page at '/home' when not signed in" do
+      get '/shome'
+      response.should_not have_selector('title', :content => "Home")
     end
+
 
      it "should have a Contact page at '/contact'" do
       get '/contact'
@@ -45,36 +46,27 @@ describe "LayoutLinks" do
       response.should have_selector('title', :content => "About")
       click_link "Help"
       response.should have_selector('title', :content => "Help")
-      click_link "Home"
-      response.should have_selector('title', :content => "Home")
       click_link "Contact"
       response.should have_selector('title', :content => "Contact")
       click_link "Privacy"
       response.should have_selector('title', :content => "Privacy")
     end
 
-    it "should have the right links on the Application layout" do
-      get home_path
-      click_link "About"
-      response.should have_selector('title', :content => "About")
-      click_link "Help"
-      response.should have_selector('title', :content => "Help")
-      click_link "Home"
-      response.should have_selector('title', :content => "Home")
-      click_link "Contact"
-      response.should have_selector('title', :content => "Contact")
-      click_link "Privacy"
-      response.should have_selector('title', :content => "Privacy")
-    end
+    
 
     describe "when not signed in" do
       it "should have a signin link" do
           visit root_path
           response.should have_selector('div', :id => "signin")
       end
+
+      it "should not have a home link" do
+          visit root_path
+          response.should_not have_selector('a', :href => "/home")
+      end
     end
 
-    describe "when sign in" do
+    describe "when signed in" do
  
       before(:each) do
 	@user = Factory(:user)
@@ -83,8 +75,27 @@ describe "LayoutLinks" do
 	fill_in :session_password,	:with => @user.password
 	click_button :session_submit
       end
+      
+       it "should have a Home page at '/home'" do
+         get '/home'
+         response.should have_selector('title', :content => "Home")
+       end
 
-      it "sjould have a signout link" do
+       it "should have the right links on the Application layout when signed in" do
+	      get home_path
+	      click_link "About"
+	      response.should have_selector('title', :content => "About")
+	      click_link "Help"
+	      response.should have_selector('title', :content => "Help")
+	      click_link "Home"
+	      response.should have_selector('title', :content => "Home")
+	      click_link "Contact"
+	      response.should have_selector('title', :content => "Contact")
+	      click_link "Privacy"
+	      response.should have_selector('title', :content => "Privacy")
+       end
+
+      it "should have a signout link" do
 	visit root_path
 	response.should have_selector("a", :href => signout_path, :content => "Sign out")
       end

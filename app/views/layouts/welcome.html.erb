@@ -10,6 +10,7 @@
 	<%= render 'layouts/header' %>
 	<div id="content">
 		<div id="tertiaryContent">
+                    <% if !signed_in? %>
                        <%@user ||= User.new %>
 		    	<%= form_for(@user) do |f| %>
                           <%= render 'shared/error_messages' %>
@@ -40,7 +41,8 @@
 				<%= f.submit "sign up" %>
 			  </div>
                          </fieldset>
-                 	<% end %>	
+                 	<% end %>
+                  <% end %>	
 		</div>
 		<div id="primaryContentContainer">
 			<div id="primaryContent">
