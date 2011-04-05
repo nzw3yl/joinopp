@@ -4,6 +4,7 @@ Joinopp::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
 
   match '/signup',  :to => 'users#new'
+  match '/signin',  :to => 'pages#welcome'
   match '/signout', :to => 'sessions#destroy'
   match '/contact', :to => 'pages#contact'
   match '/privacy', :to => 'pages#privacy'

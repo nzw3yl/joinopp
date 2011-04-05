@@ -13,7 +13,7 @@
                     <% if !signed_in? %>
                        <%@user ||= User.new %>
 		    	<%= form_for(@user) do |f| %>
-                          <%= render 'shared/error_messages' %>
+                          <%= render 'shared/error_messages', :object => f.object %>
 			 <fieldset>
                          <legend>Sign up!</legend>
 			  <div id="signup_name" class="field">
