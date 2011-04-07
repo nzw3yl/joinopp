@@ -31,7 +31,7 @@ describe SessionsController do
 	    # TODO: Fix this so it knows it ends up at the Welcome page 
 	    it "should redirect to the welcome page" do
 	       post :create, :session => @attr
-	       response.should redirect_to new_session_path
+	       response.should render_template(:new)
 	    end
 
 	    it "should have flash.now message" do
