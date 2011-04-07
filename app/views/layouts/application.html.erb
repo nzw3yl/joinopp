@@ -4,6 +4,7 @@
   <title><%= title%></title>
     <%= csrf_meta_tag %>
     <%= render 'layouts/stylesheets' %>
+    <%= javascript_include_tag :defaults %>
 </head>
 <body>
 <div id="outer">
@@ -14,8 +15,7 @@
 			<p>Vivamus sagittis bibendum erat. Curabitur lorem ipsum dolore malesuada. <a href="#">More&#8230;</a></p>
 			<h3>Nunc pellentesque</h3>
 			<ul>
-				<li><a href="#">Vivamus id arcu</a></li>
-				<li><a href="#">Duis congue ultricies</a></li>
+				
 				<li><a href="#">Purus in mollis purus</a></li>
 				<li><a href="#">Orci nonummy fringilla</a></li>
 				<li><a href="#">Pellentesque at lorem</a></li>
@@ -94,13 +94,20 @@
 			</div>
 		</div>
 		<div id="secondaryContent">
-			<h3>User</h3>
-			<p><%= link_to "Settings", edit_user_path(current_user) %></p>
+			<ul>
+				<%= render "users/profile" %>
+				<li><%= link_to "Settings", edit_user_path(current_user) %></li>
+				<%if signed_in? %>
+			        <li><%= link_to "Sign out", signout_path %></li>
+			        <% end %>
+				<li><a href="#">Purus in mollis purus</a></li>
+			</ul>
+			
 			<h3>Fusce dolor tristique</h3>
 			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
-			<h3>Nunc pellentesque</h3>
+			<h3>Administration</h3>
 			<ul>
-				<li><a href="#">Orci nonummy fringilla</a></li>
+				<li><%= link_to "Users", users_path %></li>
 				<li><a href="#">Enim vivamus convallis</a></li>
 				<li><a href="#">Duis congue ultricies</a></li>
 				<li><a href="#">Purus in mollis purus</a></li>
