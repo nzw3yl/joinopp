@@ -16,7 +16,7 @@
 			<h3>Nunc pellentesque</h3>
 			<ul>
 				
-				<li><a href="#">Purus in mollis purus</a></li>
+				<li><%= link_to "New Undertaking", new_undertaking_path %></li>
 				<li><a href="#">Orci nonummy fringilla</a></li>
 				<li><a href="#">Pellentesque at lorem</a></li>
 				<li><a href="#">Enim vivamus convallis</a></li>
@@ -44,7 +44,6 @@
 		</div>
 		<div id="primaryContentContainer">
 			<div id="primaryContent">
-				<h2>Welcome to JoinOpp.com!</h2>
 				<% flash.each do |key, value| %>
 				   <div class="flash <%= key %>"><%= value %></div>
 				<% end %>

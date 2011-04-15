@@ -1,0 +1,22 @@
+<%= form_for(@undertaking) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+	<fieldset>
+          <legend>New Undertaking</legend>
+	  <div id="new_title" class="field">
+	    	<%= f.label :title, "give it a name" %><br />
+		<%= f.text_field :title, :size=> 20 %>
+	  </div>
+
+          <div id="new_description" class="field">
+		<%= f.label :description, "what needs to be done?" %><br />
+		<%= f.text_field :description, :size=> 50 %>
+	  </div>
+          <div id="new_success_if" class="field">
+		<%= f.label :success_if, "what would success look like?" %><br />
+		<%= f.text_field :success_if, :size=> 50 %>
+	  </div>
+	  <div id="new_button" class="actions">
+		<%= f.submit "create" %>
+	  </div>
+       </fieldset>
+<% end %>
