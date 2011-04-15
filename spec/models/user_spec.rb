@@ -162,4 +162,44 @@ describe User do
     end
   end
 
+  describe "commitments" do
+    
+    before(:each) do
+      @user = User.create!(@attr)
+      @undertaking = Factory(:undertaking)
+    end
+
+    it "should have a commitments method" do
+      @user.should respond_to(:commitments)
+    end
+
+    it "should have a committed? method" do
+      @user.should respond_to(:committed_to?)
+    end
+
+    it "should have a devote! method" do
+     @user.should respond_to(:devote!)
+    end
+
+    it "should commit a user" do
+     @user.devote!(@undertaking)
+     @user.should be_committed_to(@undertaking)
+    end
+
+    it "should include the undertaking in the undertaking array" do
+     @user.devote!(@undertaking)
+     @user.undertakings.should include(@undertaking)
+    end
+
+    it "should have an abandon! method" do
+     @user.should respond_to(:abandon!)
+    end
+
+    it "should abandon a commitment" do
+     @user.devote!(@undertaking)
+     @user.abandon!(@undertaking)
+     @user.should_not be_committed_to(@undertaking)
+    end
+  end
+
 end

@@ -10,7 +10,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110407210742) do
+ActiveRecord::Schema.define(:version => 20110415013435) do
+
+  create_table "commitments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "undertaking_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commitments", ["undertaking_id"], :name => "index_commitments_on_undertaking_id"
+  add_index "commitments", ["user_id", "undertaking_id"], :name => "index_commitments_on_user_id_and_undertaking_id", :unique => true
+  add_index "commitments", ["user_id"], :name => "index_commitments_on_user_id"
+
+  create_table "undertakings", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "status_id"
+    t.string   "success_if"
+    t.integer  "visibility_id"
+    t.string   "access_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "welcome_code"

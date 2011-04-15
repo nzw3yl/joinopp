@@ -13,3 +13,14 @@ Factory.define :user do |user|
     "welcome-#{n}"
   end
 end
+
+Factory.define :undertaking do |ut|
+  ut.title 			"Kill Bill"
+  ut.description		"5 finger exploding heart"
+  ut.success_if    		"instant death"
+  ut.access_code   		"welcome"
+
+  Factory.sequence :access_code do |n|
+    "welcome-#{n}"
+  end
+end

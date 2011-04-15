@@ -46,6 +46,9 @@ class User < ActiveRecord::Base
 				:confirmation	=> true,
 				:length		=> { :within => 6..40 }
 
+   has_many :commitments, :dependent => :destroy
+   has_many :undertakings, :through => :commitments
+
 
    before_save  :encrypt_password
 
@@ -62,6 +65,18 @@ class User < ActiveRecord::Base
    def self.authenticate_with_salt(id, cookie_salt)
      user = find_by_id(id)
      (user && user.salt == cookie_salt) ? user : nil
+   end
+
+   def committed_to?(undertaking)
+     commitments.find_by_undertaking_id(undertaking)
+   end
+
+   def devote!(undertaking)
+     commitments.create!(:undertaking_id => undertaking.id)
+   end
+
+   def abandon!(undertaking)
+     commitments.find_by_undertaking_id(undertaking).destroy
    end
 
    private
