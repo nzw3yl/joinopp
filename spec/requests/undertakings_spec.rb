@@ -35,6 +35,7 @@ describe "Undertakings" do
           click_button
 	  response.should render_template('undertakings/show')
           response.should have_selector("div.flash.success", :content => "Undertaking")
+          response.should have_selector("div#undertaking_title", :content => "Kill Bill")
         end.should change(Undertaking, :count).by(1)
       end
 

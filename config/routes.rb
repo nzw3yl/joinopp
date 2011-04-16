@@ -6,16 +6,17 @@ Joinopp::Application.routes.draw do
   resources :undertakings
   resources :commitments, 	:only => [:create, :destroy]
 
-  match '/signup',  :to => 'users#new'
-  match '/signin',  :to => 'pages#welcome'
-  match '/signout', :to => 'sessions#destroy'
-  match '/contact', :to => 'pages#contact'
-  match '/privacy', :to => 'pages#privacy'
-  match '/about',   :to => 'pages#about'
-  match '/help',    :to => 'pages#help'
-  match '/home',    :to => 'pages#home'
+  match '/signup',  		:to => 'users#new'
+  match '/signin',  		:to => 'pages#welcome'
+  match '/signout', 		:to => 'sessions#destroy'
+  match '/contact', 		:to => 'pages#contact'
+  match '/privacy', 		:to => 'pages#privacy'
+  match '/about',   		:to => 'pages#about'
+  match '/help',    		:to => 'pages#help'
+  match '/home',    		:to => 'pages#home'
+  match '/admin_undertaking',   :to => 'undertakings#admin_index'
   
-  root              :to => 'pages#welcome'
+  root              		:to => 'pages#welcome'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

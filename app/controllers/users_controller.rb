@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate, :only => [:edit, :update, :show, :index, :destroy]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => :destroy
-  layout "welcome", :except => [:show, :index]  
+  layout "welcome", :except => [:edit, :show, :index]  
 
 
   def new
@@ -32,6 +32,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @title = "Edit user"
+    render :layout => "application"
   end
 
   def update
