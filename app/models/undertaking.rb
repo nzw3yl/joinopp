@@ -25,8 +25,5 @@ class Undertaking < ActiveRecord::Base
   has_many :commitments, :dependent => :destroy
   has_many :users, :through => :commitments
 
-  def self.valid_undertaking_with_salt(id, cookie_salt)
-    undertaking = find_by_id(id)
-    (undertaking && current_user.salt == cookie_salt) ? undertaking : nil
-  end
+  
 end

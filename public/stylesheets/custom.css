@@ -233,6 +233,19 @@ a:hover
 	color: inherit;
 }
 
+/* Special Content */
+
+#undertaking_title
+{
+        color: #0077dd;
+        font-size: 1em;
+}
+
+#undertaking_description
+{
+        margin-bottom: 1.5em;
+}
+
 /* Primary Content */
 
 #primaryContentContainer

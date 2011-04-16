@@ -21,10 +21,13 @@ describe CommitmentsController do
 
     before (:each) do
       @user = test_sign_in(Factory(:user))
+      @undertaking = Factory(:undertaking)
     end
-    it "should be successful" do
-      post :create
-      response.should be_success
+    it "should create a commitment" do
+      lambda do
+         post :create, :commitment => {:undertaking_id => @undertaking}
+         response.should be_redirect
+      end.should change(Commitment, :count).by(1)
     end
   end
 
@@ -32,12 +35,14 @@ describe CommitmentsController do
     before (:each) do
       @user = test_sign_in(Factory(:user))
       @undertaking = Factory(:undertaking)
-      @commitment = @user.commitments.build(:undertaking_id => @undertaking)
-      @commitment.save!
+      @user.devote!(@undertaking)
+      @commitment = @user.commitments.find_by_undertaking_id(@undertaking)
     end
-    it "should be successful" do
+    it "should destroy a commitment" do
+     lambda do
       delete :destroy, :id => @commitment
-      response.should be_success
+      response.should be_redirect
+     end.should change(Commitment, :count).by(-1)
     end
   end
 
