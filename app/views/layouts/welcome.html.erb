@@ -9,39 +9,22 @@
 <div id="outer">
 	<%= render 'layouts/header' %>
 	<div id="content">
-		<div id="tertiaryContent">
+		<div id="welcomeTertiaryContent">
                     <% if !signed_in? %>
+                      
                        <%@user ||= User.new %>
-		    	<%= form_for(@user) do |f| %>
-                          <%= render 'shared/error_messages', :object => f.object %>
-			 <fieldset>
-                         <legend>Sign up!</legend>
-			  <div id="signup_name" class="field">
-				<%= f.label :name, "name" %><br />
-				<%= f.text_field :name, :size=> 20 %>
-			  </div>
-
-                          <div id="signup_email" class="field">
-				<%= f.label :email, "email" %><br />
-				<%= f.text_field :email, :size=> 20 %>
-			  </div>
-                          <div id="signup_password" class="field">
-				<%= f.label :password, "password" %><br />
-				<%= f.password_field :password, :size=> 20 %>
-			  </div>
-                          <div id="signup_confirmation" class="field">
-				<%= f.label :password_confirmation, "confirmation" %><br />
-				<%= f.password_field :password_confirmation, :size=> 20 %>
-			  </div>
-			  <div id="signup_welcome_code" class="field">
-				<%= f.label :welcome_code, "access code" %><br />
-				<%= f.text_field :welcome_code, :size=> 20 %>
-			  </div>
-			  <div id="signup_button" class="actions">
-				<%= f.submit "sign up" %>
-			  </div>
-                         </fieldset>
-                 	<% end %>
+                      <%= simple_form_for @user do |f| %>
+		      <%= render 'shared/error_messages', :object => f.object %>
+			<fieldset>
+			  <legend>Sign Up!</legend>
+			    <%= f.input :name, :error => false %>
+			    <%= f.input :email, :error => false %>
+			    <%= f.input :password, :error => false %>
+			    <%= f.input :password_confirmation, :label => "Confirmation", :required => true, :error => false %>
+			    <%= f.input :welcome_code, :label => "Access code", :error => false %>
+			    <%= f.button :submit %>
+		       </fieldset>
+		      <% end %>
                   <% end %>	
 		</div>
 		<div id="primaryContentContainer">

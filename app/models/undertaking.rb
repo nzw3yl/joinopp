@@ -1,13 +1,13 @@
 # == Schema Information
-# Schema version: 20110415005805
+# Schema version: 20110417012009
 #
 # Table name: undertakings
 #
 #  id            :integer         not null, primary key
 #  title         :string(255)
-#  description   :string(255)
+#  description   :text(255)
 #  status_id     :integer
-#  success_if    :string(255)
+#  success_if    :text(255)
 #  visibility_id :integer
 #  access_code   :string(255)
 #  created_at    :datetime

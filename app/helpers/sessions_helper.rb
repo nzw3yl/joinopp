@@ -23,6 +23,7 @@ module SessionsHelper
 
   def sign_out
     cookies.delete(:remember_token)
+    cookies.delete(:undertaking_token)
     self.current_user = nil
   end
 
@@ -42,7 +43,7 @@ module SessionsHelper
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)
+    redirect_to(root_path) unless current_user?(@user) || current_user.admin?
   end
 
   def admin_user

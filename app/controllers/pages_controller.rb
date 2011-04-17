@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  layout :content_layout
+
   def home
     if !signed_in? 
 	redirect_to :action => :welcome and return
@@ -28,7 +31,13 @@ class PagesController < ApplicationController
     end
     @title = "Welcome"
     @user = User.new
-    render :layout => 'welcome'
+    #render :layout => 'welcome'
   end
+
+  private
+ 
+    def content_layout
+      signed_in? ? "application" : "welcome"
+    end
 
 end
