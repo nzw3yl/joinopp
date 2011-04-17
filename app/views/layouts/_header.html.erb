@@ -7,8 +7,8 @@
 		
 		<h2>what needs doing?</h2>
 	</div>
-	<% if !signed_in? %>
-	 <div id="signin">
+         <% if !signed_in? %>
+	<div id="signin">
                 <%= form_for(:session, :url => sessions_path) do |f| %>
 			 <fieldset>
 			  <span id="signin_email" class="field">
@@ -25,8 +25,7 @@
                        </fieldset>
                <% end %>
          </div>
-        <% end%>
-        
+        <% end %>
          <div id="menu">
 		<ul>
                         <% if signed_in? %>

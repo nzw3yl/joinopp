@@ -1,0 +1,10 @@
+<%= simple_form_for @undertaking do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+	<fieldset>
+          <legend>Undertaking Info</legend>
+	    <%= f.input :title , :placeholder => 'Enter a name'%>
+	    <%= f.input :description, :input_html => {:cols => 10, :rows => 5}, :placeholder => 'Valid email address' %>
+	    <%= f.input :success_if, :input_html => {:cols => 10, :rows => 5}, :placeholder => 'Describe what happens if successful...' %>
+            <%= f.button :submit %>
+       </fieldset>
+<% end %>

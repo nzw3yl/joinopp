@@ -20,13 +20,8 @@
 			<%= wrap(current_undertaking.description) %>
                         </div>
                         <%end%>
-			<h3>What Needs Doing</h3>
-			<ul class="undertakings">
-    			  <%= render undertakings %>
- 			  <% if undertakings.count > 10%>
-			  <%= link_to "more...", undertakings_path %>
-                          <% end %>
-			</ul>
+			<h3>Committed Contributors</h3>
+			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
 			<h3>Malesuada vivamus</h3>
 			<ul>
 				<li><a href="#">Orci nonummy fringilla</a></li>
@@ -93,18 +88,24 @@
 			</div>
 		</div>
 		<div id="secondaryContent">
+			<h3>My Profile</h3>
 			<ul>
 				<%= render "users/profile" %>
 				<li><%= link_to "Settings", edit_user_path(current_user) %></li>
 				<%if signed_in? %>
 			        <li><%= link_to "Sign out", signout_path %></li>
 			        <% end %>
-				<li><%= link_to "New Undertaking", new_undertaking_path %></li>
-				<li><%= link_to "List Undertakings", undertakings_path %></li>
 			</ul>
-			
-			<h3>Fusce dolor tristique</h3>
-			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+			<h3>What Needs Doing [<%= link_to "add", new_undertaking_path %>]</h3>
+			<ul class="undertakings">
+                         <% if controller.action_name != "admin_index"%>
+    			  <%= render undertakings %>
+ 			  <% if undertakings.count > 10%>
+			  <%= link_to "[show all]", undertakings_path %>
+                          <% end %>
+                         <% end %>
+			</ul>
+                        <% if current_user.admin? %>
 			<h3>Administration</h3>
 			<ul>
 				<li><%= link_to "Users", users_path %></li>
@@ -112,6 +113,7 @@
 				<li><a href="#">Duis congue ultricies</a></li>
 				<li><a href="#">Purus in mollis purus</a></li>
 			</ul>
+                        <% end %>
 			<p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
 			<h3>Ipsum Dolorem</h3>
 			<ul>

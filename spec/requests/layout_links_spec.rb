@@ -13,6 +13,43 @@ describe "LayoutLinks" do
           visit root_path
           response.should_not have_selector('a', :href => "/home")
       end
+  
+      it "should have a privacy link" do
+          visit root_path
+          response.should have_selector('a', :href => "/privacy")
+      end
+
+      it "should have an about link" do
+          visit root_path
+          response.should have_selector('a', :href => "/about")
+      end
+
+      it "should have a contact link" do
+          visit root_path
+          response.should have_selector('a', :href => "/contact")
+      end
+
+      it "should have a help link" do
+          visit root_path
+          response.should have_selector('a', :href => "/help")
+      end
+
+      it "should have the right links on the Welcome layout when not signed in" do
+	      visit root_path
+	      click_link "About"
+	      response.should have_selector('title', :content => "About")
+	      click_link "Help"
+	      response.should have_selector('title', :content => "Help")
+	      click_link "Contact"
+	      response.should have_selector('title', :content => "Contact")
+	      click_link "Privacy"
+	      response.should have_selector('title', :content => "Privacy")
+       end
+
+      it "should not have a signout link" do
+	visit root_path
+	response.should_not have_selector("a", :href => signout_path, :content => "Sign out")
+      end
 
       
     end

@@ -1,1 +1,7 @@
-Display Undertaking here...
+     <h1>
+      <%= @undertaking.title %>
+     </h1>
+     <% if current_user.admin? %>
+     | <%= link_to "edit", edit_undertaking_path(@undertaking) %> 
+     | <%= link_to "delete", @undertaking , :method => :delete , :confirm => 'Are you sure?'%>
+     <% end %>
