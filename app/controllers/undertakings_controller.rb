@@ -10,7 +10,7 @@ class UndertakingsController < ApplicationController
   def create
     @undertaking = current_user.undertakings.build(params[:undertaking])
     if @undertaking.save && last_undertaking(@undertaking)
-     current_user.devote!(@undertaking)  # why??
+     current_user.devote!(@undertaking,['owner','inviter','member'])  # why??
      flash[:success] = "Undertaking created!"
      redirect_to @undertaking
     else

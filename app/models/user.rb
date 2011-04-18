@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110417005724
+# Schema version: 20110417232923
 #
 # Table name: users
 #
@@ -12,7 +12,6 @@
 #  encrypted_password :string(255)
 #  salt               :string(255)
 #  admin              :boolean
-#  status_id          :integer(255)
 #
 
 
@@ -61,8 +60,10 @@ class User < ActiveRecord::Base
      commitments.find_by_undertaking_id(undertaking)
    end
 
-   def devote!(undertaking)
-     commitments.create!(:undertaking_id => undertaking.id)
+   def devote!(undertaking, roles = ['member'])
+     @commitment = commitments.create!(:undertaking_id => undertaking.id)
+     @commitment.roles = roles
+     @commitment.save!
    end
 
    def abandon!(undertaking)

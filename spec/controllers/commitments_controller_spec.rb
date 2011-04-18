@@ -32,18 +32,22 @@ describe CommitmentsController do
   end
 
   describe "DELETE 'destroy'" do
-    before (:each) do
-      @user = test_sign_in(Factory(:user))
-      @undertaking = Factory(:undertaking)
-      @user.devote!(@undertaking)
-      @commitment = @user.commitments.find_by_undertaking_id(@undertaking)
+ 
+    describe "authorized user" do
+      before (:each) do
+        @user = test_sign_in(Factory(:user))
+        @undertaking = Factory(:undertaking)
+        @user.devote!(@undertaking)
+        @commitment = @user.commitments.find_by_undertaking_id(@undertaking)
+      end 
+      it "should destroy a commitment" do
+	     lambda do
+	      delete :destroy, :id => @commitment
+	      response.should be_redirect
+	     end.should change(Commitment, :count).by(-1)
+      end
     end
-    it "should destroy a commitment" do
-     lambda do
-      delete :destroy, :id => @commitment
-      response.should be_redirect
-     end.should change(Commitment, :count).by(-1)
-    end
+
   end
 
 end
