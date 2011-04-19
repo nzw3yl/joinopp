@@ -38,6 +38,11 @@ class User < ActiveRecord::Base
    has_many :commitments, :dependent => :destroy
    has_many :undertakings, :through => :commitments
 
+   has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation", :dependent => :destroy
+   has_many :inviters, :through => :reverse_invitations
+
+   has_many :invitations,  :foreign_key => "inviter_id", :dependent => :destroy
+   has_many :invitees, :through => :invitations
 
    before_save  :encrypt_password
 
@@ -69,6 +74,20 @@ class User < ActiveRecord::Base
    def abandon!(undertaking)
      commitments.find_by_undertaking_id(undertaking).destroy
    end
+
+   def inviter?(invitee)
+     invitations.find_by_invitee_id(invitee)
+   end
+
+   def invite!(invitee)
+     invitations.create!(:invitee_id => invitee.id)
+   end
+   
+   def uninvite!(invitee)
+     invitations.find_by_invitee_id(invitee).destroy
+   end
+
+   
 
    private
 
