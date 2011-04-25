@@ -15,7 +15,7 @@
 #
 
 class Undertaking < ActiveRecord::Base
-  attr_accessible :title, :description, :success_if
+  attr_accessible :title, :description, :success_if, :access_code
 
   validates :title,      	:presence 	=> true,
                                 :length   	=> { :within => 6..140 }
@@ -24,6 +24,7 @@ class Undertaking < ActiveRecord::Base
 
   has_many :commitments, :dependent => :destroy
   has_many :users, :through => :commitments
+  has_many :invitations
 
-  
+   
 end

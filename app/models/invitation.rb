@@ -15,7 +15,7 @@
 #
 
 class Invitation < ActiveRecord::Base
-  attr_accessible :invitee_id, :inviter_id, :email, :access_code
+  attr_accessible :invitee_id, :undertaking_id, :email, :access_code
 
   belongs_to :invitee, :class_name => "User"
   belongs_to :inviter, :class_name => "User"

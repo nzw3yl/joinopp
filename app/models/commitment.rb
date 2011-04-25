@@ -13,7 +13,7 @@
 #
 
 class Commitment < ActiveRecord::Base
-   attr_accessible :undertaking_id, :role_id
+   attr_accessible :undertaking_id, :roles, :user_id
 
    belongs_to :user
    belongs_to :undertaking

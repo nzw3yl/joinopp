@@ -207,6 +207,7 @@ describe User do
    before(:each) do
     @user = User.create!(@attr)
     @invitee = Factory(:user)
+    @undertaking = Factory(:undertaking)
    end
 
    it "should have an invitations method" do
@@ -226,12 +227,12 @@ describe User do
    end
 
    it "should invite another user" do
-    @user.invite!(@invitee)
-    @user.should be_inviter(@invitee)
+    @user.invite!(@invitee, @undertaking)
+    @user.should be_inviter(@invitee, @undertaking)
    end
 
    it "should include the invitee in the invitees array" do
-    @user.invite!(@invitee)
+    @user.invite!(@invitee, @undertaking)
     @user.invitees.should include(@invitee)
    end
 
@@ -240,9 +241,9 @@ describe User do
    end  
   
    it "should uninvite a user" do
-    @user.invite!(@invitee)
-    @user.uninvite!(@invitee)
-    @user.should_not be_inviter(@invitee)
+    @user.invite!(@invitee, @undertaking)
+    @user.uninvite!(@invitee, @undertaking)
+    @user.should_not be_inviter(@invitee, @undertaking)
    end
 
    it "should have a reverse_invitations method" do
@@ -254,7 +255,7 @@ describe User do
    end
 
    it "should inlcude the inviter in the inviters array" do
-    @user.invite!(@invitee)
+    @user.invite!(@invitee, @undertaking)
     @invitee.inviters.should include(@user)
    end
   end

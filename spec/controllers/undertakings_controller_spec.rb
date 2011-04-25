@@ -38,7 +38,8 @@ describe UndertakingsController do
 
       it "should create an undertaking" do
 	lambda do
-	  post :create, :undertaking => @attr
+          @user.undertakings.create!(@attr)
+	  #post :create, :undertaking => @attr
         end.should change(Undertaking, :count).by(1)
       end      
     end
@@ -51,7 +52,8 @@ describe UndertakingsController do
 
       it "should not create an undertaking" do
 	lambda do
-	  post :create, :undertaking => @attr
+	  @user.undertakings.create(@attr)
+	  #post :create, :undertaking => @attr
         end.should_not change(Undertaking, :count)
       end      
     end

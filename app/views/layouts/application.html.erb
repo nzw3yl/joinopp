@@ -100,7 +100,7 @@
 			<ul class="undertakings">
                          <% if controller.action_name != "admin_index"%>
     			  <%= render undertakings %>
- 			  <% if undertakings.count > 10%>
+ 			  <% if undertakings.count > 9 %>
 			  <%= link_to "[show all]", undertakings_path %>
                           <% end %>
                          <% end %>

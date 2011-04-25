@@ -66,25 +66,28 @@ class User < ActiveRecord::Base
    end
 
    def devote!(undertaking, roles = ['member'])
-     @commitment = commitments.create!(:undertaking_id => undertaking.id)
-     @commitment.roles = roles
-     @commitment.save!
+     commitments.create!(:undertaking_id => undertaking.id)
+     #@commitment.roles = roles
+     #@commitment.save!
    end
 
    def abandon!(undertaking)
+     #commitments.find_by_user_id_and_undertaking_id(id, undertaking).destroy
      commitments.find_by_undertaking_id(undertaking).destroy
    end
 
-   def inviter?(invitee)
-     invitations.find_by_invitee_id(invitee)
+   def inviter?(invitee, undertaking)
+     @invitation = self.invitations.find_by_invitee_id_and_undertaking_id(invitee.id, undertaking.id)
    end
 
-   def invite!(invitee)
-     invitations.create!(:invitee_id => invitee.id)
+   def invite!(invitee, undertaking)
+     invitations.create!(:invitee_id => invitee.id, :undertaking_id => undertaking.id)
+     #undertaking.invitations.create!(:invitee_id => invitee.id)
    end
    
-   def uninvite!(invitee)
-     invitations.find_by_invitee_id(invitee).destroy
+   def uninvite!(invitee, undertaking) 
+     #undertaking.invitations.find_by_invitee_id_and_inviter_id(invitee, self.id).destroy
+     @invitation = self.invitations.find_by_invitee_id_and_undertaking_id(invitee.id, undertaking.id).destroy
    end
 
    
