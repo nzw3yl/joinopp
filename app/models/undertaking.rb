@@ -27,4 +27,6 @@ class Undertaking < ActiveRecord::Base
   has_many :invitations
 
    
+  
+
 end

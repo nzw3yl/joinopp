@@ -8,7 +8,7 @@ class UndertakingsController < ApplicationController
   end
 
   def create
-    @undertaking = current_user.undertakings.build(params[:undertaking])
+    @undertaking = current_user.undertakings.create(params[:undertaking])
     if @undertaking.save && last_undertaking(@undertaking) 
      flash[:success] = "Undertaking created!"
      redirect_to @undertaking

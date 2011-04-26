@@ -89,7 +89,6 @@ class User < ActiveRecord::Base
      #undertaking.invitations.find_by_invitee_id_and_inviter_id(invitee, self.id).destroy
      @invitation = self.invitations.find_by_invitee_id_and_undertaking_id(invitee.id, undertaking.id).destroy
    end
-
    
 
    private
@@ -111,4 +110,6 @@ class User < ActiveRecord::Base
      def secure_hash(string)
        Digest::SHA2.hexdigest(string)
      end
+
+     
 end

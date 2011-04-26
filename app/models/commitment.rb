@@ -23,6 +23,8 @@ class Commitment < ActiveRecord::Base
 
    scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0 "}}
 
+   before_create :set_role
+
    ROLES = %w[owner inviter member viewer]
 
    def roles=(roles)
@@ -36,5 +38,13 @@ class Commitment < ActiveRecord::Base
    def role_symbols
      roles.map(&:to_sym)
    end
+
+   private
+
+        def set_role
+          if self.roles.empty?
+           self.roles = (['owner','inviter','member'])
+          end
+        end
 
 end
