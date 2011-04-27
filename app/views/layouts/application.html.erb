@@ -20,8 +20,21 @@
 			<%= wrap(current_undertaking.description) %>
                         </div>
                         <%end%>
-			<h3>Committed Contributors</h3>
-			<p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+			<h3>Invitations</h3>
+			<div id="invitations">
+                          <ul class="invitations">
+			     <%= render reverse_invitations %>
+                          </ul>	
+			</div>
+                        <h3>What Needs Doing [<%= link_to "add", new_undertaking_path %>]</h3>
+			<ul class="undertakings">
+                         <% if controller.action_name != "admin_index"%>
+    			  <%= render undertakings %>
+ 			  <% if undertakings.count > 9 %>
+			  <%= link_to "[show all]", undertakings_path %>
+                          <% end %>
+                         <% end %>
+			</ul>
 			<h3>Malesuada vivamus</h3>
 			<ul>
 				<li><a href="#">Orci nonummy fringilla</a></li>
@@ -96,15 +109,7 @@
 			        <li><%= link_to "Sign out", signout_path %></li>
 			        <% end %>
 			</ul>
-			<h3>What Needs Doing [<%= link_to "add", new_undertaking_path %>]</h3>
-			<ul class="undertakings">
-                         <% if controller.action_name != "admin_index"%>
-    			  <%= render undertakings %>
- 			  <% if undertakings.count > 9 %>
-			  <%= link_to "[show all]", undertakings_path %>
-                          <% end %>
-                         <% end %>
-			</ul>
+			
                         <% if current_user.admin? %>
 			<h3>Administration</h3>
 			<ul>

@@ -1,10 +1,12 @@
 Joinopp::Application.routes.draw do
 
 
-  resources :users
+  resources :users 
+  resources :invitations
   resources :sessions, 		:only => [:new, :create, :destroy]
   resources :undertakings
   resources :commitments, 	:only => [:create, :destroy]
+
 
   match '/signup',  		:to => 'users#new'
   match '/signin',  		:to => 'pages#welcome'
