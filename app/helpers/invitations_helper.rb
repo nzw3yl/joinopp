@@ -4,8 +4,8 @@ module InvitationsHelper
    @invitations = current_user.invitations.find(:all, :limit => 10)
   end
 
-  def reverse_invitations
-   @reverse_invitations = current_user.reverse_invitations.find(:all, :limit => 10)
+  def reverse_invitations(display_count = 4)
+   @reverse_invitations = current_user.reverse_invitations.find(:all, :limit => display_count)
   end
 
   def undertaking_name(invitation)

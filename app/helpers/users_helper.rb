@@ -5,4 +5,9 @@ module UsersHelper
 						:class => 'gravatar',
 						:gravatar => options)
   end
+
+  def user_name(id)
+    @user = User.find(id)
+    @user.nil? ? "anonymous" : @user.name
+  end
 end

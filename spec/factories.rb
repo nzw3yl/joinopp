@@ -24,3 +24,13 @@ Factory.define :undertaking do |ut|
     "welcome-#{n}"
   end
 end
+
+Factory.define :invitation do |inv|
+  inv.email			"rsmith@example.com"
+  inv.access_code		"welcome"
+  inv.inviter_id		1	
+
+  Factory.sequence :access_code do |n|
+    "welcome-#{n}"
+  end
+end

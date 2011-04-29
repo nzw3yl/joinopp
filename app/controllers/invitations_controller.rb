@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :show, :index]
+
   def new
     @title = "Invitations"
   end
