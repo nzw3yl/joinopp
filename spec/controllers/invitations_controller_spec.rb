@@ -8,6 +8,7 @@ describe InvitationsController do
   describe "GET 'new'" do
 
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = test_sign_in(Factory(:user))
     end
 

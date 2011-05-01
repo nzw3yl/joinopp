@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Undertakings" do
    
   before (:each) do
+    @invitation = Factory(:invitation)
     user = Factory(:user)
     visit signin_path
     fill_in :session_email,	:with => user.email

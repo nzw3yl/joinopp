@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "FriendlyForwardings" do
 
     it "should forward to the requested page after singin" do
+      @invitation = Factory(:invitation)
       user = Factory(:user)
       visit edit_user_path(user)
       #the test automatically follows the redirect to the signin page

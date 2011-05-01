@@ -56,6 +56,7 @@ describe Undertaking do
     
     before(:each) do
       @undertaking = Undertaking.create!(@attr)
+      @invitation_er = Factory(:invitation)
       @user = Factory(:user)
     end
 

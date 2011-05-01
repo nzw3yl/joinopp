@@ -10,6 +10,7 @@ describe User do
 		:password => "foobar",
 		:password_confirmation => "foobar" 
 	     }
+   @invitation = Factory(:invitation, :email => "user@example.com", :access_code => "User")
   end
 
   it "should create a new instance given valid attributes" do
@@ -98,6 +99,7 @@ describe User do
   describe "password encryption" do
 
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = User.create!(@attr)
     end
 
@@ -145,6 +147,7 @@ describe User do
   describe "admin attribute" do
     
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = User.create!(@attr)
     end
 
@@ -165,6 +168,7 @@ describe User do
   describe "commitments" do
     
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = User.create!(@attr)
       @undertaking = Factory(:undertaking)
     end
@@ -205,7 +209,9 @@ describe User do
   describe "invitations" do
 
    before(:each) do
+    @invitation = Factory(:invitation)
     @user = User.create!(@attr)
+    @factory_invitation = Factory(:invitation, :email => "rsmith@example.com", :access_code => "welcome")
     @invitee = Factory(:user)
     @undertaking = Factory(:undertaking)
    end

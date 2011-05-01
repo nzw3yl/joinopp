@@ -8,6 +8,7 @@ describe PagesController do
   end
   describe "when signed in" do
 	  before(:each) do
+            @invitation = Factory(:invitation)
 	    test_sign_in(Factory(:user))
 	  end
 

@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
    has_many :invitees, :through => :invitations
 
    before_save  :encrypt_password
+   before_create :new_invitee?
 
    def has_password?(submitted_password)
      encrypted_password == encrypt(submitted_password)
@@ -80,6 +81,12 @@ class User < ActiveRecord::Base
      @invitation = self.invitations.find_by_invitee_id_and_undertaking_id(invitee.id, undertaking.id)
    end
 
+   def new_invitee?
+     @invitation = Invitation.find(:first, :conditions => 
+                       ["email = ? AND access_code = ?", self.email.downcase, self.welcome_code])
+     !@invitation.nil? 
+   end
+
    def invite!(invitee, undertaking)
      invitations.create!(:invitee_id => invitee.id, :undertaking_id => undertaking.id)
      #undertaking.invitations.create!(:invitee_id => invitee.id)
@@ -97,7 +104,6 @@ class User < ActiveRecord::Base
        self.salt = make_salt if new_record?
        self.encrypted_password = encrypt(password)
      end
-
 
      def encrypt(string)
        secure_hash("#{salt}--#{string}")

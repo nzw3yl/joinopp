@@ -20,12 +20,18 @@ describe UsersController do
     describe "for signed-in users" do
       
       before(:each) do
-        @user = test_sign_in(Factory(:user))
-	second = Factory(:user, :name => "Bob", :email => "another@example.com")
-	third  = Factory(:user, :name => "Ben", :email => "another@example.net")
+        @invitation = Factory(:invitation)
+	secondi = Factory(:invitation, :access_code => "Bob", :email => "another@example.com")
+	thirdi  = Factory(:invitation, :access_code => "Ben", :email => "another@example.net")
 
+        @user = test_sign_in(Factory(:user))
+	second = Factory(:user, :name => "Bob", :email => "another@example.com",:welcome_code => "Bob")
+	third  = Factory(:user, :name => "Ben", :email => "another@example.net", :welcome_code => "Ben")
+ 
+        @invitations = [@invitation, secondi, thirdi]
     	@users = [@user, second, third]
         20.times do
+          @invitations << Factory(:invitation, :email => Factory.next(:i_email), :access_code => Factory.next(:i_access_code))
 	  @users << Factory(:user, :email => Factory.next(:email), :welcome_code => Factory.next(:welcome_code))
         end
       end
@@ -58,6 +64,7 @@ describe UsersController do
   describe "GET 'show'" do
 
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = Factory(:user)
       test_sign_in(@user)
     end
@@ -130,7 +137,27 @@ describe UsersController do
 	response.should render_template('welcome')
       end
 
-      it "should only accept valid welcome codes" 
+      describe "invalid invitation" do
+        before(:each) do
+		@attr = { :name => "New User", :email => "user@zzzzzz.com" , :welcome_code => "lkasdhdfhafh", 
+			  :password => "foobar", :password_confirmation => "foobar" }
+               
+	end
+        it "should reject a mismatched email address" do
+            lambda do
+              @invitation = Factory(:invitation, :email => "user@example.net", :access_code => "welcome")
+    	      post :create, :user => @attr
+            end.should_not change(User, :count)
+        end
+
+        it "should reject an invalid welcome code" do
+            lambda do
+              @invitation = Factory(:invitation, :email => "user@example.com", :access_code => "keepout")
+    	      post :create, :user => @attr
+            end.should_not change(User, :count)
+        end
+
+      end
 
     end
 
@@ -139,6 +166,7 @@ describe UsersController do
 	before(:each) do
 		@attr = { :name => "New User", :email => "user@example.com" , :welcome_code => "welcome", 
 			  :password => "foobar", :password_confirmation => "foobar" }
+                @invitation = Factory(:invitation, :email => "user@example.com", :access_code => "welcome")
 	end
 
 	it "should create a user" do
@@ -168,6 +196,7 @@ describe UsersController do
   describe "Get 'edit'" do
 	
     before(:each) do
+        @invitation = Factory(:invitation)
 	@user = Factory(:user)
 	test_sign_in(@user)
     end
@@ -191,6 +220,7 @@ describe UsersController do
 
   describe "PUT 'update'" do
     before(:each) do
+        @invitation = Factory(:invitation)
 	@user = Factory(:user)
 	test_sign_in(@user)
     end
@@ -238,6 +268,7 @@ describe UsersController do
   describe "authentication of edit/update pages" do
 
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = Factory(:user)
     end
 
@@ -258,6 +289,7 @@ describe UsersController do
     describe "for signed in users" do
 
       before(:each) do
+         @invitation = Factory(:invitation, :email => "user@example.net")
         wrong_user = Factory(:user, :email => "user@example.net")
         test_sign_in(wrong_user)
       end
@@ -279,6 +311,7 @@ describe UsersController do
   describe "DELETE 'destroy'" do
     
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = Factory(:user)
     end
 
@@ -300,6 +333,7 @@ describe UsersController do
     describe "as an admin user" do
       
       before(:each) do
+        @invitation = Factory(:invitation, :email => "admin@example.com", :access_code => "welcome_admin")
         admin = Factory(:user, :email => "admin@example.com", 
                                 :welcome_code => "welcome_admin",
                                 :admin => true)

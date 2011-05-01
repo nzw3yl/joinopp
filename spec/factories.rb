@@ -1,6 +1,6 @@
 Factory.define :user do |user|
   user.name		        "Roger"
-  user.welcome_code		"Smith"
+  user.welcome_code		"welcome"
   user.email			"rsmith@example.com"
   user.password			"foobar"
   user.password_confirmation	"foobar"
@@ -30,7 +30,10 @@ Factory.define :invitation do |inv|
   inv.access_code		"welcome"
   inv.inviter_id		1	
 
-  Factory.sequence :access_code do |n|
+  Factory.sequence :i_email do |n|
+    "person-#{n}@example.com"
+  end
+  Factory.sequence :i_access_code do |n|
     "welcome-#{n}"
   end
 end

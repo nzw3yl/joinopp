@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Commitment do
   
   before(:each) do
+   @invitation = Factory(:invitation)
    @user = Factory(:user)
    @undertaking = Factory(:undertaking)
 

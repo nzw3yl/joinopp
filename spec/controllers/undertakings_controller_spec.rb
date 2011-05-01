@@ -14,6 +14,7 @@ describe UndertakingsController do
 
   describe "GET 'new'" do
    before (:each) do
+      @invitation = Factory(:invitation)
       @user = test_sign_in(Factory(:user))
     end
 
@@ -27,6 +28,7 @@ describe UndertakingsController do
   describe "POST 'create'" do
 
     before (:each) do
+      @invitation = Factory(:invitation)
       @user = test_sign_in(Factory(:user))
     end
     
@@ -72,6 +74,7 @@ describe UndertakingsController do
     describe "for signed-in users" do
       
       before(:each) do
+        @invitation = Factory(:invitation)
         @user = test_sign_in(Factory(:user, :admin => true))
         first = Factory(:undertaking, :title => "Kill Bill", :description => "5 finger exploding heart", :access_code => "welcome 001")
 	second = Factory(:undertaking, :title => "Kill Bill", :description => "5 finger exploding heart", :access_code => "welcome 002")
@@ -109,6 +112,7 @@ describe UndertakingsController do
     
     before(:each) do
       @undertaking = Factory(:undertaking)
+      @invitation = Factory(:invitation)
       @user = Factory(:user)
     end
 
@@ -130,6 +134,7 @@ describe UndertakingsController do
     describe "as an admin user" do
       
       before(:each) do
+        @invitation = Factory(:invitation, :email => "admin@example.com", :access_code => "welcome_admin" )
         admin = Factory(:user, :email => "admin@example.com", 
                                 :welcome_code => "welcome_admin",
                                 :admin => true)
@@ -152,6 +157,7 @@ describe UndertakingsController do
 
     describe "PUT 'update'" do
     before(:each) do
+        @invitation = Factory(:invitation)
 	@user = Factory(:user)
 	test_sign_in(@user)
         @undertaking = Factory(:undertaking)
@@ -200,6 +206,7 @@ describe UndertakingsController do
   describe "authentication of edit/update pages" do
 
     before(:each) do
+      @invitation = Factory(:invitation)
       @user = Factory(:user)
       @undertaking = Factory(:undertaking)
     end

@@ -57,6 +57,7 @@ describe "LayoutLinks" do
     describe "when signed in" do
  
       before(:each) do
+        @invitation = Factory(:invitation)
 	@user = Factory(:user)
 	visit root_path
 	fill_in :session_email,		:with => @user.email

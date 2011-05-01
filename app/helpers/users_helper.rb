@@ -10,4 +10,5 @@ module UsersHelper
     @user = User.find(id)
     @user.nil? ? "anonymous" : @user.name
   end
+
 end

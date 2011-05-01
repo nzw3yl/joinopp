@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Invitation do
   
   before(:each) do
+    @invitation_er = Factory(:invitation)
+    @invitation_ee = Factory(:invitation, :email => Factory.next(:i_email))
     @inviter = Factory(:user)
     @invitee = Factory(:user, :email => Factory.next(:email))
 

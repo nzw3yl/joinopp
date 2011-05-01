@@ -43,6 +43,7 @@ describe SessionsController do
      describe "success" do
 	
 	before(:each) do
+          @invitation = Factory(:invitation)
     	  @user = Factory(:user)
           @attr = { :email => @user.email, :password => @user.password }
   	end
@@ -65,6 +66,7 @@ describe SessionsController do
   describe "DELETE 'destroy'" do
 
 	it "should sign a user out" do
+           @invitation = Factory(:invitation)
 	   test_sign_in(Factory(:user))
            delete :destroy
            controller.should_not be_signed_in

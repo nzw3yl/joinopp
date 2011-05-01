@@ -25,7 +25,9 @@ describe "Users" do
      describe "success" do
 
     	it "should make a new user" do
+              
               lambda do
+                invitation = Factory(:invitation, :email => "user@example.com", :access_code => "welcome")
 		visit root_path
 		fill_in :user_name,		:with => "Example User"
 		fill_in :user_email,		:with => "user@example.com"
@@ -42,6 +44,10 @@ describe "Users" do
   end
 
   describe "sign in/out" do
+
+        before(:each) do
+          @invitation = Factory(:invitation)
+        end
 
 	describe "failure" do
 	  it "should not sign a user in" do

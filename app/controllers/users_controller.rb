@@ -18,8 +18,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
-    if @user.save
+    @user = User.new(params[:user]) 
+    @has_invite = @user.new_invitee?
+    @user.errors.add(:welcome_code, "error! Please verify your welcome code.") unless @has_invite
+    if  @has_invite && @user.save   
       sign_in @user
       flash[:success] = "Welcome to JoinOpp!"
       redirect_to @user
@@ -57,6 +59,7 @@ class UsersController < ApplicationController
     flash[:success] = "User destroyed."
     redirect_to users_path
   end
+
 
  
 end
