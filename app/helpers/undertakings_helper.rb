@@ -13,7 +13,7 @@ module UndertakingsHelper
  end
 
  def undertakings
-   @undertakings ||= current_user.undertakings.find(:all, :limit => 10)
+   @undertakings ||= current_user.undertakings.find(:all)
  end
 
  def last_undertaking(undertaking)

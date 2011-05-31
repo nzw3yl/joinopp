@@ -1,0 +1,11 @@
+
+<h3>What Needs Doing [<%= link_to "add", new_undertaking_path %>]</h3>
+			<ul class="undertakings">
+                         <% if controller.action_name != "admin_index"%>
+    			  <%= render undertakings %>
+ 			  <% if undertakings.count > 9 %>
+			  <%= link_to "[show all]", undertakings_path %>
+                          <% end %>
+                         <% end %>
+			</ul>
+

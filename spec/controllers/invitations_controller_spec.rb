@@ -3,12 +3,11 @@ require 'spec_helper'
 describe InvitationsController do
   render_views
 
-
-
   describe "GET 'new'" do
 
     before(:each) do
       @invitation = Factory(:invitation)
+      @undertaking = test_choose_undertaking(Factory(:undertaking))
       @user = test_sign_in(Factory(:user))
     end
 

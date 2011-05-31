@@ -1,0 +1,11 @@
+<%= simple_form_for @invitation do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+	<fieldset>
+          <legend>Invitation Info</legend>
+	    <%= f.input :email , :placeholder => 'Email Addresss'%>
+            <%= f.input :undertaking_id, :as => :hidden, :input_html => { :value => current_undertaking.id } %>
+	    <%= f.input :access_code, :placeholder => 'Welcome Code' %>
+            <%= f.association :invitee %>
+            <%= f.button :submit %>
+       </fieldset>
+<% end %>
