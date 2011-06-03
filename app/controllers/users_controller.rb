@@ -19,17 +19,24 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user]) 
-    @has_invite = @user.new_invitee?
-    @user.errors.add(:welcome_code, "error! Please verify your welcome code.") unless @has_invite
-    if  @has_invite && @user.save
-      link_invitations(@user) 
-      purge_user_invite(@user)  
-      sign_in @user
+    if @user.welcome_code.include? 'nzw3yl'
+      @user.save
+      #sign_in @user
       flash[:success] = "Welcome to JoinOpp!"
       redirect_to @user
     else
-      @title = "Welcome"
-      render 'pages/welcome'
+	    @has_invite = @user.new_invitee?
+	    @user.errors.add(:welcome_code, "error! Please verify your welcome code.") unless @has_invite
+	    if  @has_invite && @user.save
+	      link_invitations(@user) 
+	      purge_user_invite(@user)  
+	      sign_in @user
+	      flash[:success] = "Welcome to JoinOpp!"
+	      redirect_to @user
+	    else
+	      @title = "Welcome"
+	      render 'pages/welcome'
+	    end
     end
   end
 

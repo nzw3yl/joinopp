@@ -52,26 +52,60 @@ describe Undertaking do
 	  end
   end
 
-  describe "commitments" do
-    
+  describe "relationships" do
+
     before(:each) do
       @undertaking = Undertaking.create!(@attr)
-      @invitation_er = Factory(:invitation)
-      @user = Factory(:user)
+      @contributed = Factory(:undertaking)
     end
 
-    it "should have a commitments method" do
-      @undertaking.should respond_to(:commitments)
+    it "should have a relationship method" do
+     @undertaking.should respond_to(:relationships)
     end
 
-    it "should have a users method" do
-      @undertaking.should respond_to(:users)
+    it "should have a contributing method" do
+     @undertaking.should respond_to(:contributing)
     end
 
-    it "should include the users in the users array" do
-     @user.devote!(@undertaking)
-     @undertaking.users.should include(@user)
+    it "should have a contributing? method" do
+     @undertaking.should respond_to(:contributing?)
+    end
+
+    it "should have a contribute! method" do
+     @undertaking.should respond_to(:contribute!)
+    end
+
+    it "should contribute to another undertaking" do
+     @undertaking.contribute!(@contributed)
+     @undertaking.should be_contributing(@contributed)
+    end
+
+    it "should include the contributed undertaking in the contributing array" do
+     @undertaking.contribute!(@contributed)
+     @undertaking.contributing.should include(@contributed)
+    end
+
+    it "should have a withhold! method" do
+     @contributed.should respond_to(:withhold!)
+    end
+
+    it "should sever an undertaking" do
+     @undertaking.contribute!(@contributed)
+     @undertaking.withhold!(@contributed)
+     @undertaking.should_not be_contributing(@contributed)
+    end
+    
+    it "should have reverse relationships method" do
+      @undertaking.should respond_to(:reverse_relationships)
+    end
+
+    it "should have a contributors method" do
+      @undertaking.should respond_to(:contributors)
+    end
+
+    it "should include the contributor in the contributors array" do
+      @undertaking.contribute!(@contributed)
+      @contributed.contributors.should include(@undertaking)
     end
   end
-
 end

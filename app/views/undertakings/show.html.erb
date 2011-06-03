@@ -1,8 +1,33 @@
-     <h1>
+     <h3>
       <%= @undertaking.title %>
-     </h1>
+     </h3>
+        <div id="undertaking_description"><%= @undertaking.description %></div>
      <% if current_user.admin? %>
      | <%= link_to "edit", edit_undertaking_path(@undertaking) %> 
      | <%= link_to "delete", @undertaking , :method => :delete , :confirm => 'Are you sure?'%>
      <% end %>
      [<%= link_to "invite", new_invitation_path %>]
+     <%= render 'stats' %>
+     
+        <h2> [Activity Log] | [Participants (#)] | [Linking (#)] | [Linked (#)]  </h2>
+ 	<blockquote>
+	   <% user ||= current_user %>
+           <%= gravatar_for user, :size => 30 %>
+           <%= link_to user.name, user %> spent 5 hours filling the pool 9 hours ago
+	</blockquote>
+        <blockquote>
+	   <% user ||= current_user %>
+           <%= gravatar_for user, :size => 30 %>
+          <%= link_to user.name, user %> spent 2 hours pouring cement 1 day ago
+	</blockquote>
+	<blockquote>
+	   <% user ||= current_user %>
+           <%= gravatar_for user, :size => 30 %>
+          <%= link_to user.name, user %> spent 6 hours building stuff 2 days ago
+	</blockquote>
+	<blockquote>
+	   <% user ||= current_user %>
+           <%= gravatar_for user, :size => 30 %>
+          <%= link_to user.name, user %> spent 5 hours making this work 3 days ago
+	</blockquote>
+     

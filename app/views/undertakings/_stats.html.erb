@@ -1,0 +1,21 @@
+<% @undertaking ||= current_undertaking %>
+<div class="stats">
+  <table summary="Undertaking stats">
+    <tr>
+     <td>
+      <a href="<%= contributing_undertaking_path(@undertaking)%>">
+        <span id="contributing" class="stat">
+          <%= @undertaking.contributing.count %>  contributing
+        </span>
+      </a>
+     </td>
+      <td>
+      <a href="<%= contributors_undertaking_path(@undertaking)%>">
+        <span id="contributors" class="stat">
+          <%= pluralize(@undertaking.contributors.count, "contributor") %>
+        </span>
+      </a>
+     </td>
+    </tr>
+  </table>
+</div>

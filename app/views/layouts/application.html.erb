@@ -84,6 +84,9 @@
 			          <%= link_to "Sign out", signout_path %>
 			        <% end %>
 			</div>
+			<div id="teams">
+				<%= link_to "Groups (4)", edit_user_path(current_user) %>
+			</div>
 			<br/>
                         <h3>Undertakings (<%= link_to undertakings.count, undertakings_path %>)</h3>
 			<ul>

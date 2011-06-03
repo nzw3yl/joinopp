@@ -4,7 +4,12 @@ Joinopp::Application.routes.draw do
   resources :users 
   resources :invitations
   resources :sessions, 		:only => [:new, :create, :destroy]
-  resources :undertakings
+  resources :undertakings do
+    member do
+      get :contributing, :contributors
+    end
+  end
+
   resources :commitments, 	:only => [:create, :destroy]
 
 

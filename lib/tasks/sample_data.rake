@@ -7,7 +7,7 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_undertakings
-    make_invitations
+    make_relationships
   end
 
   def make_users
@@ -20,7 +20,7 @@ namespace :db do
     99.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@joinopp.com"
-      welcome_code = "welcome-#{n+1}"
+      welcome_code = "nzw3yl-#{n+1}"
       password = "password"
       User.create!(:name 			=> name,
 	 	   :email			=> email,
@@ -33,7 +33,7 @@ namespace :db do
   def make_undertakings
     User.all(:limit =>25).each do |user|
       25.times do
-        title = Faker::Lorem.sentence(6)
+        title = Faker::Lorem.words(6).join[0..24]
         description = Faker::Lorem.sentence(6)
         access_code = Faker::Lorem.words(2)
         user.undertakings.create!(:title => title, :description => description, :access_code => access_code)
@@ -41,13 +41,14 @@ namespace :db do
     end
   end
 
-  def make_invitations
-    users = User.all
-    user = users.first
-    invitees = users[1..24]
-    inviters = users[3..20]
-    invitees.each { |invited| user.invite!(invited, user.undertakings.first) }
-    inviters.each { |inviter| inviter.invite!(user, inviter.undertakings.first) }
-  end
 
+  def make_relationships
+    undertakings = Undertaking.all
+    undertaking = undertakings.first
+    contributing = undertakings[1..25]
+    contributors = undertakings[3..20]
+    contributing.each { |contributed| undertaking.contribute!(contributed) }
+    contributors.each { |contributor| contributor.contribute!(undertaking) }
+  end
+  
 end

@@ -19,7 +19,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
    attr_accessor :password
-   attr_accessible :name, :welcome_code, :email, :password, :password_confirmation
+   attr_accessible :name, :welcome_code, :email, :password, :password_confirmation, :user_id
 
    email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -35,17 +35,16 @@ class User < ActiveRecord::Base
 				:confirmation	=> true,
 				:length		=> { :within => 6..40 }
 
-   has_many :commitments, :dependent => :destroy
-   has_many :undertakings, :through => :commitments
-
    has_many :reverse_invitations, :foreign_key => "invitee_id", :class_name => "Invitation", :dependent => :destroy
    has_many :inviters, :through => :reverse_invitations
 
    has_many :invitations,  :foreign_key => "inviter_id", :dependent => :destroy
    has_many :invitees, :through => :invitations
 
+   has_many :undertakings
+
    before_save  :encrypt_password
-   before_create :new_invitee?
+  # before_create :new_invitee?
 
    def has_password?(submitted_password)
      encrypted_password == encrypt(submitted_password)
@@ -62,20 +61,6 @@ class User < ActiveRecord::Base
      (user && user.salt == cookie_salt) ? user : nil
    end
 
-   def committed_to?(undertaking)
-     commitments.find_by_undertaking_id(undertaking)
-   end
-
-   def devote!(undertaking, roles = ['member'])
-     commitments.create!(:undertaking_id => undertaking.id)
-     #@commitment.roles = roles
-     #@commitment.save!
-   end
-
-   def abandon!(undertaking)
-     #commitments.find_by_user_id_and_undertaking_id(id, undertaking).destroy
-     commitments.find_by_undertaking_id(undertaking).destroy
-   end
 
    def inviter?(invitee, undertaking)
      @invitation = self.invitations.find_by_invitee_id_and_undertaking_id(invitee.id, undertaking.id)

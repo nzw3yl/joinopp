@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110419004522) do
+ActiveRecord::Schema.define(:version => 20110602015344) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "user_id"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(:version => 20110419004522) do
   add_index "invitations", ["email", "access_code"], :name => "index_invitations_on_email_and_access_code"
   add_index "invitations", ["email"], :name => "index_invitations_on_email"
 
+  create_table "relationships", :force => true do |t|
+    t.integer  "contributor_id"
+    t.integer  "contributed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["contributed_id"], :name => "index_relationships_on_contributed_id"
+  add_index "relationships", ["contributor_id", "contributed_id"], :name => "index_relationships_on_contributor_id_and_contributed_id", :unique => true
+  add_index "relationships", ["contributor_id"], :name => "index_relationships_on_contributor_id"
+
   create_table "undertakings", :force => true do |t|
     t.string   "title"
     t.text     "description",   :limit => 255
@@ -49,6 +60,9 @@ ActiveRecord::Schema.define(:version => 20110419004522) do
     t.string   "access_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "scope_mask"
+    t.integer  "metric_id"
   end
 
   create_table "users", :force => true do |t|
