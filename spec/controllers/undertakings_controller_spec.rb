@@ -228,4 +228,41 @@ describe UndertakingsController do
 
   end
 
+  describe "contribute pages" do
+    
+    describe "when not signed in" do
+      
+      it "should protect 'contributing'" do
+        get :contributing, :id => 1
+        response.should redirect_to(signin_path)
+      end
+
+      it "should protect 'contributors'" do
+        get :contributors, :id => 1
+        response.should redirect_to(signin_path)
+      end
+    end
+
+    describe "when signed in" do
+      
+       before(:each) do
+         @user = test_sign_in(Factory(:user))
+         @undertaking1 = Factory(:undertaking)
+         @undertaking2 =  Factory(:undertaking, :access_code => Factory.next(:access_code))
+         @undertaking1.contribute!(@undertaking2)
+       end
+
+       it "should show contributing undertakings " do
+        get :contributing, :id => @undertaking1
+        response.should have_selector("a", :href => undertaking_path(@undertaking2), :content => @undertaking2.title)
+       end
+
+       it "should show an undertaking's contributors " do
+        get :contributors, :id => @undertaking2
+        response.should have_selector("a", :href => undertaking_path(@undertaking1), :content => @undertaking1.title)
+       end
+
+    end
+  end
+
 end

@@ -1,0 +1,10 @@
+     <h3>    
+        <%= @undertaking.title %>
+     </h3>
+        <div id="undertaking_description"><%= @undertaking.description %></div>
+        <%= render 'stats' %>
+        <% unless @undertakings.empty? %>
+           <% @undertakings.each do |undertaking| %>
+             <%= link_to undertaking.title, undertaking %>
+           <% end %>
+        <% end %>

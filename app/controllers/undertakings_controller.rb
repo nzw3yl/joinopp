@@ -57,5 +57,19 @@ class UndertakingsController < ApplicationController
     redirect_to undertakings_path
   end
 
+  def contributing
+    @title = "Contributing"
+    @undertaking = Undertaking.find(params[:id])
+    @undertakings = @undertaking.contributing.page(params[:page]).per(20)
+    render 'show_contribute'
+  end
+
+  def contributors
+    @title = "Contributors"
+    @undertaking = Undertaking.find(params[:id])
+    @undertakings = @undertaking.contributors.page(params[:page]).per(20)
+    render 'show_contribute'
+  end
+
 
 end
