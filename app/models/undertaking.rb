@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110602015344
+# Schema version: 20110617010807
 #
 # Table name: undertakings
 #
@@ -15,6 +15,7 @@
 #  user_id       :integer
 #  scope_mask    :integer
 #  metric_id     :integer
+#  goal_id       :integer
 #
 
 class Undertaking < ActiveRecord::Base
@@ -35,6 +36,7 @@ class Undertaking < ActiveRecord::Base
   has_many :contributors, :through => :reverse_relationships, :source => :contributor
 
   belongs_to :user 
+  belongs_to :goal
   
 
   def contributing?(contributed)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110602015344) do
+ActiveRecord::Schema.define(:version => 20110617011958) do
 
   create_table "commitments", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20110602015344) do
   add_index "commitments", ["undertaking_id"], :name => "index_commitments_on_undertaking_id"
   add_index "commitments", ["user_id", "undertaking_id"], :name => "index_commitments_on_user_id_and_undertaking_id", :unique => true
   add_index "commitments", ["user_id"], :name => "index_commitments_on_user_id"
+
+  create_table "goals", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "scope_mask"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "goals", ["user_id"], :name => "index_goals_on_user_id"
 
   create_table "invitations", :force => true do |t|
     t.string   "email"
@@ -63,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20110602015344) do
     t.integer  "user_id"
     t.integer  "scope_mask"
     t.integer  "metric_id"
+    t.integer  "goal_id"
   end
 
   create_table "users", :force => true do |t|

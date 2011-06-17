@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
    has_many :invitees, :through => :invitations
 
    has_many :undertakings
+   has_many :goals
 
    before_save  :encrypt_password
   # before_create :new_invitee?

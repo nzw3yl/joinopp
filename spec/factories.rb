@@ -13,7 +13,15 @@ Factory.define :user do |user|
     "welcome-#{n}"
   end
 end
+Factory.define :goal do |g|
+  g.title 			"First Goal"
+  g.description			"Goal Description"
+  g.user_id	   		1
 
+   Factory.sequence :user_id do |n|
+    n
+   end  
+end
 Factory.define :undertaking do |ut|
   ut.title 			"Kill Bill"
   ut.description		"5 finger exploding heart"

@@ -108,4 +108,20 @@ describe Undertaking do
       @contributed.contributors.should include(@undertaking)
     end
   end
+
+  describe "goal associations" do
+    before(:each) do
+     @goal = Factory(:goal)
+     @undertaking = @goal.undertakings.create!(@attr)
+    end
+
+    it "should have a goal attribute" do
+     @undertaking.should respond_to(:goal)
+    end
+
+    it "should have the right associated goal" do
+      @undertaking.goal_id.should == @goal.id
+      @undertaking.goal.should == @goal
+    end
+  end
 end

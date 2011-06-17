@@ -30,6 +30,8 @@ namespace :db do
     end
   end
 
+ 
+
   def make_undertakings
     User.all(:limit =>25).each do |user|
       25.times do
